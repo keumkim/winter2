@@ -548,6 +548,38 @@ spec:
 
 ```
 
+- Deployment.yml 에 ConfigMap 적용
+```java
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sirenorder
+  namespace: tutorial
+  labels:
+    app: sirenorder
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sirenorder
+  template:
+    metadata:
+      labels:
+        app: sirenorder
+    spec:
+      containers:
+        - name: sirenorder
+          image: skuser01.azurecr.io/sirenorder:v1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: configurl
+              valueFrom:
+                configMapKeyRef:
+                  name: apiurl
+                  key: url
+```
+
 - ConfigMap 사용(/SirenOrder/src/main/java/winterschoolone/external/CouponService.java) 
 
 ```java
@@ -568,17 +600,13 @@ public interface CouponService {
 }
 ```
 
-- Deployment.yml 에 ConfigMap 적용
-
-![image](https://user-images.githubusercontent.com/74236548/107925407-c2a19600-6fb7-11eb-9325-6bd2cd94455c.png)
-
 - ConfigMap 생성
 
 ```
-kubectl create configmap apiurl2 --from-literal=url2=http://gateway.tutorial:8080 -n tutorial
+kubectl create configmap apiurl --from-literal=url=http://gateway.tutorial:8080 -n tutorial
 ```
 
-   ![image](https://user-images.githubusercontent.com/74236548/107968395-aa4e6d00-6ff1-11eb-9112-2f1d77a561ad.png)
+   ![image](https://postfiles.pstatic.net/MjAyMTAyMThfMTIy/MDAxNjEzNjExMTE2Mjc2.YbyHBzrYx39MEKFFNx5yRaGIA-w-TToy4TlY1r-7D50g.Exob4nJ7nGzyKfLwyTqat7fpGahiW0u8jWrB8W4zRvIg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-18_%EC%98%A4%EC%A0%84_10.18.16.png?type=w773)
 
 # 오토스케일 아웃
 
