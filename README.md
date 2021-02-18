@@ -516,7 +516,7 @@ spec:
 ```	  
 - deploy 완료
 
-![전체 MSA](https://postfiles.pstatic.net/MjAyMTAyMThfMTM2/MDAxNjEzNjEwMjUwMTMw.dACl1GEddJkqc7Z4TtkAtNKDnFB9N9xYCtUTu2IA8Vcg.sGycgsHGAjnLhilnMpPDD97Q3w__gTgEW0hORqxcHOwg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-18_%EC%98%A4%EC%A0%84_10.03.53.png?type=w773)
+![전체 MSA](https://postfiles.pstatic.net/MjAyMTAyMThfODkg/MDAxNjEzNjE0NTMwNjI3.vDiBqI7_ZIB97eEUyp9fyWAxAPu_cuEPeX2H7wt4-kgg.rLnkKakwtrXwbW2XiunI3irzzgsqKy8d_YuQANDd1kMg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-18_%EC%98%A4%EC%A0%84_11.15.11.png?type=w773)
 
 # ConfigMap 
 - 시스템별로 변경 가능성이 있는 설정들을 ConfigMap을 사용하여 관리
