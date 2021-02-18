@@ -526,7 +526,7 @@ spec:
 ```	  
 - deploy 완료
 
-![전체 MSA](https://user-images.githubusercontent.com/77368578/108006011-992b4d80-703d-11eb-8df9-a2cea19aa693.png)
+![전체 MSA](https://postfiles.pstatic.net/MjAyMTAyMThfMTM2/MDAxNjEzNjEwMjUwMTMw.dACl1GEddJkqc7Z4TtkAtNKDnFB9N9xYCtUTu2IA8Vcg.sGycgsHGAjnLhilnMpPDD97Q3w__gTgEW0hORqxcHOwg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-18_%EC%98%A4%EC%A0%84_10.03.53.png?type=w773)
 
 # ConfigMap 
 - 시스템별로 변경 가능성이 있는 설정들을 ConfigMap을 사용하여 관리
