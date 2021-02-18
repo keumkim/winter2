@@ -488,7 +488,7 @@ az acr build --registry skuser01 --image skuser01.azurecr.io/sirenorder:v1 .
 kubectl expose deploy sirenorder --type=ClusterIP --port=8080 -n tutorial
 ```
 
-- winterone/SirenOrder/kubernetes/deployment.yml 파일 
+- winter/SirenOrder/kubernetes/deployment.yml 파일 
 ```yml
 apiVersion: apps/v1
 kind: Deployment
@@ -518,6 +518,11 @@ spec:
                 configMapKeyRef:
                   name: apiurl
                   key: url
+            - name: configurl2
+              valueFrom:
+                configMapKeyRef:
+                  name: apiurl2
+                  key: url2
 ```	  
 - deploy 완료
 
@@ -526,7 +531,7 @@ spec:
 # ConfigMap 
 - 시스템별로 변경 가능성이 있는 설정들을 ConfigMap을 사용하여 관리
 
-- application.yml 파일에 ${configurl} 설정
+- application.yml 파일에 ${configurl}, ${configurl2} 설정
 
 ```yaml
       feign:
@@ -539,20 +544,28 @@ spec:
       api:
         url:
           Payment: ${configurl}
+          Coupon: ${configurl}
 
 ```
 
 - ConfigMap 사용(/SirenOrder/src/main/java/winterschoolone/external/PaymentService.java) 
 
 ```java
+package winterschoolone.external;
 
-      @FeignClient(name="Payment", url="${api.url.Payment}")
-      public interface PaymentService {
-      
-	      @RequestMapping(method= RequestMethod.POST, path="/payments")
-              public void pay(@RequestBody Payment payment);
-	      
-      }
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
+@FeignClient(name="Coupon", url="${api.url.Coupon}")
+public interface CouponService {
+
+    @RequestMapping(method= RequestMethod.POST, path="/coupons")
+    public void use(@RequestBody Coupon coupon);
+
+}
 ```
 
 - Deployment.yml 에 ConfigMap 적용
@@ -562,7 +575,7 @@ spec:
 - ConfigMap 생성
 
 ```
-kubectl create configmap apiurl --from-literal=url=http://10.0.92.205:8080 -n tutorial
+kubectl create configmap apiurl2 --from-literal=url2=http://gateway.tutorial:8080/coupons -n tutorial
 ```
 
    ![image](https://user-images.githubusercontent.com/74236548/107968395-aa4e6d00-6ff1-11eb-9112-2f1d77a561ad.png)
@@ -571,7 +584,7 @@ kubectl create configmap apiurl --from-literal=url=http://10.0.92.205:8080 -n tu
 
 - 서킷 브레이커는 시스템을 안정되게 운영할 수 있게 해줬지만, 사용자의 요청이 급증하는 경우, 오토스케일 아웃이 필요하다.
 
->- 단, 부하가 제대로 걸리기 위해서, recipe 서비스의 리소스를 줄여서 재배포한다.(winterone/Shop/kubernetes/deployment.yml 수정)
+>- 단, 부하가 제대로 걸리기 위해서, recipe 서비스의 리소스를 줄여서 재배포한다.(winter/Coupon/kubernetes/deployment.yml 수정)
 
 ```yaml
           resources:
@@ -583,16 +596,16 @@ kubectl create configmap apiurl --from-literal=url=http://10.0.92.205:8080 -n tu
 
 - 다시 expose 해준다.
 ```
-kubectl expose deploy shop --type=ClusterIP --port=8080 -n tutorial
+kubectl expose deploy coupon --type=ClusterIP --port=8080 -n tutorial
 ```
 - recipe 시스템에 replica를 자동으로 늘려줄 수 있도록 HPA를 설정한다. 설정은 CPU 사용량이 15%를 넘어서면 replica를 10개까지 늘려준다.
 ```
-kubectl autoscale deploy shop --min=1 --max=10 --cpu-percent=15 -n tutorial
+kubectl autoscale deploy coupon --min=1 --max=10 --cpu-percent=15 -n tutorial
 ```
 - siege를 활용해서 워크로드를 2분간 걸어준다. (Cloud 내 siege pod에서 부하줄 것)
 ```
 kubectl exec -it pod/siege -c siege -n tutorial -- /bin/bash
-siege -c100 -t120S -r10 -v --content-type "application/json" 'http://10.0.14.180:8080/shops POST {"orderId": 111, "userId": "user10", "menuId": "menu10", "qty":10}'
+siege -c100 -t120S -r10 -v --content-type "application/json" 'http://10.0.14.180:8080/coupons POST {"orderId": 111, "userId": "user10", "menuId": "menu10", "qty":10, "stampQty":10, "CouponQty":1}'
 ```
 ![autoscale(hpa) 실행 및 부하발생](https://user-images.githubusercontent.com/77368578/107917594-8405de80-6fab-11eb-830c-b15f255b2314.png)
 - 오토스케일 모니터링을 걸어 스케일 아웃이 자동으로 진행됨을 확인한다.
