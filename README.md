@@ -375,7 +375,7 @@ Coupon 서비스의 DB와 SirenOrder의 DB를 다른 DB를 사용하여 폴리�
 
 분석단계에서의 조건 중 하나로 결제(Payment)->쿠폰(Coupon) 간의 호출은 동기식 일관성을 유지하는 트랜잭션으로 처리하기로 하였다. 호출 프로토콜은 Rest Repository 에 의해 노출되어있는 REST 서비스를 FeignClient 를 이용하여 호출하도록 한다.
 
-**Payment 서비스 내 external.CouponService**
+**SirenOrder 서비스 내 external.CouponService**
 ```java
 
 package winterschoolone.external;
@@ -396,7 +396,7 @@ public interface CouponService {
 ```
 
 **동작 확인**
-- 잠시 Payment 서비스 중시
+- 잠시 Coupon 서비스 중시
 
 ![증빙6](https://user-images.githubusercontent.com/53815271/107910391-a85abe80-6f9d-11eb-8dd5-6b7a4d1cdc01.png)
 
@@ -404,7 +404,7 @@ public interface CouponService {
 
 ![증빙7](https://user-images.githubusercontent.com/53815271/107910392-a8f35500-6f9d-11eb-98e4-2cf9fa2fbd46.png)
 
-- Payment 서비스 재기동 후 정상동작 확인
+- Coupon 서비스 재기동 후 정상동작 확인
 
 ![증빙8](https://user-images.githubusercontent.com/53815271/107910393-a98beb80-6f9d-11eb-833f-150d11f51067.png)
 ![증빙9](https://user-images.githubusercontent.com/53815271/107910394-a98beb80-6f9d-11eb-841c-aa6ab38cf99b.png)
@@ -531,7 +531,7 @@ spec:
 # ConfigMap 
 - 시스템별로 변경 가능성이 있는 설정들을 ConfigMap을 사용하여 관리
 
-- application.yml 파일에 ${configurl}, ${configurl2} 설정
+- application.yml 파일에 ${configurl} 설정
 
 ```yaml
       feign:
@@ -548,7 +548,7 @@ spec:
 
 ```
 
-- ConfigMap 사용(/SirenOrder/src/main/java/winterschoolone/external/PaymentService.java) 
+- ConfigMap 사용(/SirenOrder/src/main/java/winterschoolone/external/CouponService.java) 
 
 ```java
 package winterschoolone.external;
@@ -575,7 +575,7 @@ public interface CouponService {
 - ConfigMap 생성
 
 ```
-kubectl create configmap apiurl2 --from-literal=url2=http://gateway.tutorial:8080/coupons -n tutorial
+kubectl create configmap apiurl2 --from-literal=url2=http://gateway.tutorial:8080 -n tutorial
 ```
 
    ![image](https://user-images.githubusercontent.com/74236548/107968395-aa4e6d00-6ff1-11eb-9112-2f1d77a561ad.png)
