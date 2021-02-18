@@ -396,18 +396,12 @@ public interface CouponService {
 ```
 
 **동작 확인**
-- 잠시 Coupon 서비스 중시
-
-![증빙6](https://user-images.githubusercontent.com/53815271/107910391-a85abe80-6f9d-11eb-8dd5-6b7a4d1cdc01.png)
-
+- Coupon 서비스 중시
 - 주문 요청시 에러 발생
-
-![증빙7](https://user-images.githubusercontent.com/53815271/107910392-a8f35500-6f9d-11eb-98e4-2cf9fa2fbd46.png)
+![증빙7](https://postfiles.pstatic.net/MjAyMTAyMThfMiAg/MDAxNjEzNjExNTM5Njg2.w4vBXhRCr5EZQOLSo5SxwXDhdMB51T9sblgq15OHOOkg.kFzOuPxbTaEJpnnmdF0mFx6qDD-wATv-LhS4VuqWW2gg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-18_%EC%98%A4%EC%A0%84_10.25.25.png?type=w773)
 
 - Coupon 서비스 재기동 후 정상동작 확인
-
-![증빙8](https://user-images.githubusercontent.com/53815271/107910393-a98beb80-6f9d-11eb-833f-150d11f51067.png)
-![증빙9](https://user-images.githubusercontent.com/53815271/107910394-a98beb80-6f9d-11eb-841c-aa6ab38cf99b.png)
+![증빙8](https://postfiles.pstatic.net/MjAyMTAyMThfMiAg/MDAxNjEzNjExNTM5Njg2.w4vBXhRCr5EZQOLSo5SxwXDhdMB51T9sblgq15OHOOkg.kFzOuPxbTaEJpnnmdF0mFx6qDD-wATv-LhS4VuqWW2gg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-18_%EC%98%A4%EC%A0%84_10.25.25.png?type=w773)
 
 # 운영
 
@@ -518,11 +512,6 @@ spec:
                 configMapKeyRef:
                   name: apiurl
                   key: url
-            - name: configurl2
-              valueFrom:
-                configMapKeyRef:
-                  name: apiurl2
-                  key: url2
 ```	  
 - deploy 완료
 
