@@ -396,7 +396,7 @@ public interface CouponService {
 ```
 
 **동작 확인**
-- Coupon 서비스 중시
+- Coupon 서비스 중지
 - 주문 요청시 에러 발생
 
 ![증빙7](https://postfiles.pstatic.net/MjAyMTAyMThfMiAg/MDAxNjEzNjExNTM5Njg2.w4vBXhRCr5EZQOLSo5SxwXDhdMB51T9sblgq15OHOOkg.kFzOuPxbTaEJpnnmdF0mFx6qDD-wATv-LhS4VuqWW2gg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-18_%EC%98%A4%EC%A0%84_10.25.25.png?type=w773)
