@@ -21,7 +21,7 @@
     1. 고객이 주문상태를 SirenOrderHome에서 확인 할 수 있어야 한다. → CQRS 
 
 # Event Storming 결과
-![Event Storming](https://postfiles.pstatic.net/MjAyMTAyMTdfMTE0/MDAxNjEzNTcwMjQyODkz.98OJE9ceV1GypJeXGRxsBZbJWrhbIc1OMQISnVlO0dcg.pI3hwophjjf3GJy58jvr3xJ2q3MnLbKBypk-JGNkL7wg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-17_%EC%98%A4%ED%9B%84_10.56.44.png?type=w773)
+![Event Storming](https://postfiles.pstatic.net/MjAyMTAyMThfMjM4/MDAxNjEzNjA3MjUxMTgz.7lQvGHedqgegF4wiYv7QBxnCNTG5xmBA9zhBoEEomT8g.4GKkmMDDfASMxDqoj2ND4noWlgiOV5-hne997jE8J_og.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-18_%EC%98%A4%EC%A0%84_9.13.47.png?type=w773)
 
 # 헥사고날 아키텍처 다이어그램 도출
 
