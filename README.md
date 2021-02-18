@@ -482,8 +482,7 @@ cd ..
 cd SirenOrder
 az acr build --registry skuser01 --image skuser01.azurecr.io/sirenorder:v1 .
 ```
-![deployment 적용](https://postfiles.pstatic.net/MjAyMTAyMTdfNTIg/MDAxNjEzNTQzNjg5MjIz.iq3_eXh58xe50nSYtVMotRvHkaj50E8z3_ZJesSyPP0g.fkfQiTg3X9ABnpLiKyecx0uK-oosibRI9sZhdwpFrmkg.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-17_%EC%98%A4%ED%9B%84_3.34.30.png?type=w773)
-![증빙7](https://user-images.githubusercontent.com/77368578/107920373-35a70e80-6fb0-11eb-8024-a6fc42fea93f.png)
+![deployment 적용](https://postfiles.pstatic.net/MjAyMTAyMThfMTA1/MDAxNjEzNjA3NzU3MTk5.DJuGgElRCJ6fxQUOkyv5CdAtXVk4sy_OsDiN_7AIIRYg.4G6e92A_Vhy5M6RebDQzxgsADx_CTUA_2CNdk2TEDE8g.PNG.ksquaring/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7_2021-02-18_%EC%98%A4%EC%A0%84_9.22.16.png?type=w773)
 
 ```
 kubectl expose deploy sirenorder --type=ClusterIP --port=8080 -n tutorial
